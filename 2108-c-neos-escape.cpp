@@ -2,30 +2,23 @@
 using namespace std;
 
 void solve() {
-	int c; cin >> c;
-	for (auto i = 0; i < c; ++i) {
-		int n, prev; cin >> n;
-		int res = 0;
-		vector<int> clean;
-		prev = -1;
-		for (auto j = 0; j < n; ++j) {
-			int curr; cin >> curr;
-			if (prev != curr) {
-				prev = curr;
-				clean.push_back(curr);
+	int tt = 1; cin >> tt;
+	while(tt--) {
+		int n; cin >> n;
+		vector<int> a;
+		a.push_back(-1e9);
+		for(auto i = 0; i < n; ++i) {
+			int c; cin >> c;
+			if (a.back() != c) {
+				a.push_back(c);
 			}
 		}
-		if (clean.size() == 1) {
-			cout << 1 << endl;
-			continue;
+		a.push_back(-1e9);
+		int r = 0;
+		for (auto i = 1; i < a.size(); ++i) {
+			if (a[i-1] < a[i] && a[i+1] < a[i]) ++r;
 		}
-		for(auto i = 0; i < clean.size(); ++i) {
-			if (i-1 >= 0 && i+1 < clean.size()) {
-				if (clean[i-1] < clean[i] && clean[i] > clean[i+1]) ++res;
-			} else if (i-1 >= 0 && clean[i-1] < clean[i]) ++res;
-			else if (i+1 < clean.size() && clean[i+1] < clean[i]) ++res;
-		}		
-		cout << res << endl;
+		cout << r << endl;
 	}
 }
 
